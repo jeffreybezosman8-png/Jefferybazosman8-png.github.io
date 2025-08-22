@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      padding: 20px;
+    }
+    .admin {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .admin img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 40px 20px;
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+    }
+    .card img {
+      max-width: 120px;
+      height: auto;
+    }
+    .card h2 {
+      margin-top: 15px;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .card.connect {
+      grid-column: span 1;
+    }
+    @media (min-width: 768px) {
+      .card.connect {
+        grid-column: span 2;
+      }
+    }
+    .card.connect h2 {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Admin -->
+    <div class="admin">
+      <img src="https://i.ibb.co/j9bRdWG0/admin.png" alt="Admin">
+      <span>Admin</span>
+    </div>
+
+    <div class="grid">
+      <!-- Option One -->
+      <div class="card">
+        <img src="https://i.ibb.co/fGkdr1k5/app1.png" alt="Option One">
+        <h2>Option One</h2>
+      </div>
+
+      <!-- Mail -->
+      <div class="card">
+        <img src="https://i.ibb.co/KjMJ2nDm/mail.png" alt="Mail">
+        <h2>Mail</h2>
+      </div>
+
+      <!-- Connect -->
+      <div class="card connect">
+        <img src="https://i.ibb.co/w9DFYbv/connect.png" alt="Connect">
+        <h2>Connect</h2>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
