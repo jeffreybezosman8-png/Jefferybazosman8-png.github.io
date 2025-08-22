@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard</title>
+  <title>Zoho Access</title>
   <style>
     body {
       margin: 0;
@@ -11,78 +11,25 @@
       background-color: #f3f4f6;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-    }
-    .container {
-      position: relative;
-      width: 100%;
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .admin {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      display: flex;
+      justify-content: center;
       align-items: center;
-      cursor: pointer;
-      text-decoration: none;
-      color: black;
-      z-index: 1000;
+      overflow: hidden;
     }
-    .admin img {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      margin-right: 6px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    @media (min-width: 768px) {
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    .card {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      padding: 40px 20px;
-      text-align: center;
-      transition: box-shadow 0.3s ease;
-      cursor: pointer;
-      text-decoration: none;
-      color: black;
-    }
-    .card:hover {
-      box-shadow: 0 8px 12px rgba(0,0,0,0.15);
-    }
-    .card img {
-      max-width: 120px;
-      height: auto;
-    }
-    .card h2 {
-      margin-top: 15px;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    .card.connect {
-      grid-column: span 1;
-    }
-    @media (min-width: 768px) {
-      .card.connect {
-        grid-column: span 2;
-      }
-    }
-    .card.connect h2 {
+    .access-btn {
+      background: #2563eb;
+      color: white;
       font-size: 2rem;
+      padding: 40px 80px;
+      border-radius: 20px;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.3s ease, top 0.2s ease, left 0.2s ease;
+      cursor: pointer;
+      position: absolute;
+    }
+    .access-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 16px rgba(0,0,0,0.25);
     }
     iframe.fullscreen {
       position: fixed;
@@ -94,75 +41,63 @@
       margin: 0;
       z-index: 999;
     }
-    .footer {
-      background: #111;
-      color: #fff;
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9rem;
-    }
-    .footer.hidden {
+    iframe {
       display: none;
+    }
+    .lol-message {
+      position: absolute;
+      font-size: 2rem;
+      color: #ff0000;
+      font-weight: bold;
+      pointer-events: none;
+      animation: fadeOut 1s forwards;
+    }
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Admin -->
-    <a class="admin" href="https://mailadmin.zoho.com/cpanel/home.do#dashboard" target="contentFrame">
-      <img src="https://i.ibb.co/j9bRdWG0/admin.png" alt="Admin">
-      <span>Admin</span>
-    </a>
+  <a id="accessBtn" class="access-btn">Access ZOHO</a>
 
-    <div class="grid">
-      <!-- Cliq -->
-      <a class="card" href="https://cliq.zoho.com/company/886257428/index.do" data-link>
-        <img src="https://i.ibb.co/fGkdr1k5/app1.png" alt="Cliq">
-        <h2>Cliq</h2>
-      </a>
-
-      <!-- Mail -->
-      <a class="card" href="https://mail.zoho.com/zm/#mail/views/all" data-link>
-        <img src="https://i.ibb.co/KjMJ2nDm/mail.png" alt="Mail">
-        <h2>Mail</h2>
-      </a>
-
-      <!-- Connect -->
-      <a class="card connect" href="https://connect.zoho.com/portal/intranet/myfeed" data-link>
-        <img src="https://i.ibb.co/w9DFYbv/connect.png" alt="Connect">
-        <h2>Connect</h2>
-      </a>
-    </div>
-  </div>
-
-  <!-- Embedded iframe fullscreen -->
-  <iframe id="contentFrame" class="" src=""></iframe>
-
-  <!-- Footer banner -->
-  <div id="footer" class="footer">
-    <span>LUCAS·ROBBY·CAMDEN·JOSH</span>
-    Made with ❤️ by Josh
-  </div>
+  <iframe id="contentFrame"></iframe>
 
   <script>
-    const links = document.querySelectorAll('[data-link]');
+    const accessBtn = document.getElementById('accessBtn');
     const iframe = document.getElementById('contentFrame');
-    const footer = document.getElementById('footer');
 
-    links.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        iframe.src = link.href;
-        iframe.classList.add('fullscreen');
-        footer.classList.add('hidden');
-      });
+    accessBtn.style.top = '50%';
+    accessBtn.style.left = '50%';
+    accessBtn.style.transform = 'translate(-50%, -50%)';
+
+    function showLOLMessage(x, y) {
+      const msg = document.createElement('div');
+      msg.className = 'lol-message';
+      msg.style.left = x + 'px';
+      msg.style.top = y + 'px';
+      msg.textContent = 'LOL LOL LOL LOL LOL LOL LOL';
+      document.body.appendChild(msg);
+      setTimeout(() => document.body.removeChild(msg), 1000);
+    }
+
+    accessBtn.addEventListener('mouseover', () => {
+      if (Math.random() < 0.3) {
+        const newTop = Math.random() * (window.innerHeight - 120);
+        const newLeft = Math.random() * (window.innerWidth - 240);
+        accessBtn.style.top = `${newTop}px`;
+        accessBtn.style.left = `${newLeft}px`;
+        accessBtn.style.transform = 'none';
+        showLOLMessage(newLeft, newTop - 40);
+      }
     });
 
-    document.querySelector('.admin').addEventListener('click', (e) => {
+    accessBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      iframe.src = e.currentTarget.href;
+      iframe.src = 'https://zoho.com';
+      iframe.style.display = 'block';
       iframe.classList.add('fullscreen');
-      footer.classList.add('hidden');
+      accessBtn.style.display = 'none';
     });
   </script>
 </body>
