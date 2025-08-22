@@ -3,22 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>jashboard1</title>
+  <title>Dashboard</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #f3f4f6;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
     .container {
       position: relative;
       width: 100%;
-      max-width: 900px;
+      max-width: 1200px;
+      margin: auto;
       padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
     .admin {
       position: absolute;
@@ -27,6 +30,9 @@
       display: flex;
       align-items: center;
       cursor: pointer;
+      text-decoration: none;
+      color: black;
+      z-index: 1000;
     }
     .admin img {
       width: 28px;
@@ -52,6 +58,8 @@
       text-align: center;
       transition: box-shadow 0.3s ease;
       cursor: pointer;
+      text-decoration: none;
+      color: black;
     }
     .card:hover {
       box-shadow: 0 8px 12px rgba(0,0,0,0.15);
@@ -76,35 +84,86 @@
     .card.connect h2 {
       font-size: 2rem;
     }
+    iframe.fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      margin: 0;
+      z-index: 999;
+    }
+    .footer {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+    }
+    .footer.hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <!-- Admin -->
-    <div class="admin">
+    <a class="admin" href="https://mailadmin.zoho.com/cpanel/home.do#dashboard" target="contentFrame">
       <img src="https://i.ibb.co/j9bRdWG0/admin.png" alt="Admin">
       <span>Admin</span>
-    </div>
+    </a>
 
     <div class="grid">
-      <!-- Option One -->
-      <div class="card">
-        <img src="https://i.ibb.co/fGkdr1k5/app1.png" alt="Option One">
-        <h2>Option One</h2>
-      </div>
+      <!-- Cliq -->
+      <a class="card" href="https://cliq.zoho.com/company/886257428/index.do" data-link>
+        <img src="https://i.ibb.co/fGkdr1k5/app1.png" alt="Cliq">
+        <h2>Cliq</h2>
+      </a>
 
       <!-- Mail -->
-      <div class="card">
+      <a class="card" href="https://mail.zoho.com/zm/#mail/views/all" data-link>
         <img src="https://i.ibb.co/KjMJ2nDm/mail.png" alt="Mail">
         <h2>Mail</h2>
-      </div>
+      </a>
 
       <!-- Connect -->
-      <div class="card connect">
+      <a class="card connect" href="https://connect.zoho.com/portal/intranet/myfeed" data-link>
         <img src="https://i.ibb.co/w9DFYbv/connect.png" alt="Connect">
         <h2>Connect</h2>
-      </div>
+      </a>
     </div>
   </div>
+
+  <!-- Embedded iframe fullscreen -->
+  <iframe id="contentFrame" class="" src=""></iframe>
+
+  <!-- Footer banner -->
+  <div id="footer" class="footer">
+    <span>LUCAS·ROBBY·CAMDEN·JOSH</span>
+    Made with ❤️ by Josh
+  </div>
+
+  <script>
+    const links = document.querySelectorAll('[data-link]');
+    const iframe = document.getElementById('contentFrame');
+    const footer = document.getElementById('footer');
+
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        iframe.src = link.href;
+        iframe.classList.add('fullscreen');
+        footer.classList.add('hidden');
+      });
+    });
+
+    document.querySelector('.admin').addEventListener('click', (e) => {
+      e.preventDefault();
+      iframe.src = e.currentTarget.href;
+      iframe.classList.add('fullscreen');
+      footer.classList.add('hidden');
+    });
+  </script>
 </body>
 </html>
