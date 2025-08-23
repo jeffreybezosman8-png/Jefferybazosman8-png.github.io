@@ -66,16 +66,14 @@
       setTimeout(() => document.body.removeChild(msg), 1000);
     }
 
-    // Randomly dodge the mouse sometimes
+    // Always dodge the mouse (100% chance)
     accessBtn.addEventListener('mouseover', () => {
-      if (Math.random() < 0.3) {
-        const newTop = Math.random() * (window.innerHeight - 120);
-        const newLeft = Math.random() * (window.innerWidth - 240);
-        accessBtn.style.top = `${newTop}px`;
-        accessBtn.style.left = `${newLeft}px`;
-        accessBtn.style.transform = 'none';
-        showLOLMessage(newLeft, newTop - 40);
-      }
+      const newTop = Math.random() * (window.innerHeight - 120);
+      const newLeft = Math.random() * (window.innerWidth - 240);
+      accessBtn.style.top = `${newTop}px`;
+      accessBtn.style.left = `${newLeft}px`;
+      accessBtn.style.transform = 'none';
+      showLOLMessage(newLeft, newTop - 40);
     });
 
     // On click, redirect to Zoho
