@@ -43,13 +43,47 @@
       0% { opacity: 1; }
       100% { opacity: 0; }
     }
+    /* iframe overlay */
+    .iframe-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: white;
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+    }
+    .iframe-container iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+    }
+    .close-btn {
+      background: #dc2626;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
   <a id="accessBtn" class="access-btn">Access ZOHO</a>
 
+  <div id="iframeBox" class="iframe-container">
+    <button class="close-btn" id="closeIframe">Close</button>
+    <iframe id="myIframe" src=""></iframe>
+  </div>
+
   <script>
     const accessBtn = document.getElementById('accessBtn');
+    const iframeBox = document.getElementById('iframeBox');
+    const iframe = document.getElementById('myIframe');
+    const closeBtn = document.getElementById('closeIframe');
 
     // Center button initially
     accessBtn.style.top = '50%';
@@ -78,11 +112,25 @@
       }
     });
 
-    // On click, redirect to Zoho
+    // On click, open Zoho inside iframe
     accessBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      window.location.href = "https://zoho.com";
+      iframe.src = "https://zoho.com";
+      iframeBox.style.display = "flex";
     });
+
+    // Close iframe
+    closeBtn.addEventListener('click', () => {
+      iframeBox.style.display = "none";
+      iframe.src = "";
+    });
+
+    // 🚨 FORCE all new tabs/windows into the iframe
+    window.open = function(url) {
+      iframe.src = url;
+      iframeBox.style.display = "flex";
+      return null;
+    };
   </script>
 </body>
 </html>
