@@ -66,14 +66,16 @@
       setTimeout(() => document.body.removeChild(msg), 1000);
     }
 
-    // Always dodge the mouse (100% chance)
+    // 60% chance to dodge the mouse
     accessBtn.addEventListener('mouseover', () => {
-      const newTop = Math.random() * (window.innerHeight - 120);
-      const newLeft = Math.random() * (window.innerWidth - 240);
-      accessBtn.style.top = `${newTop}px`;
-      accessBtn.style.left = `${newLeft}px`;
-      accessBtn.style.transform = 'none';
-      showLOLMessage(newLeft, newTop - 40);
+      if (Math.random() < 0.6) {
+        const newTop = Math.random() * (window.innerHeight - 120);
+        const newLeft = Math.random() * (window.innerWidth - 240);
+        accessBtn.style.top = `${newTop}px`;
+        accessBtn.style.left = `${newLeft}px`;
+        accessBtn.style.transform = 'none';
+        showLOLMessage(newLeft, newTop - 40);
+      }
     });
 
     // On click, redirect to Zoho
@@ -83,6 +85,4 @@
     });
   </script>
 </body>
-  <footer>Made with ❤️ by Josh</footer>
-  
 </html>
